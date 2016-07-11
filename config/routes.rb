@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :papers, only: [:index, :create, :show]
   namespace :api do
     resources :annotations do
       resources :comments
