@@ -1,10 +1,13 @@
 class PapersController < ApplicationController
+  before_action :authenticate_user!
+
   def index
     @paper = Paper.new
   end
 
   def create
     @paper = Paper.new(paper_params)
+    @paper.submitter = current_user
 
     respond_to do |format|
       if @paper.save

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160712125922) do
+ActiveRecord::Schema.define(version: 20160712135058) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,6 +19,8 @@ ActiveRecord::Schema.define(version: 20160712125922) do
     t.json     "annotation", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "review_id",  null: false
+    t.index ["review_id"], name: "index_annotations_on_review_id", using: :btree
   end
 
   create_table "comments", force: :cascade do |t|
@@ -30,10 +32,22 @@ ActiveRecord::Schema.define(version: 20160712125922) do
   end
 
   create_table "papers", force: :cascade do |t|
-    t.string   "name",       null: false
-    t.binary   "data",       null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "name",         null: false
+    t.binary   "data",         null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.integer  "submitter_id", null: false
+    t.index ["submitter_id"], name: "index_papers_on_submitter_id", using: :btree
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.boolean  "finished",    default: false, null: false
+    t.integer  "reviewer_id",                 null: false
+    t.integer  "paper_id",                    null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.index ["paper_id"], name: "index_reviews_on_paper_id", using: :btree
+    t.index ["reviewer_id"], name: "index_reviews_on_reviewer_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
@@ -45,5 +59,9 @@ ActiveRecord::Schema.define(version: 20160712125922) do
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
   end
 
+  add_foreign_key "annotations", "reviews", on_delete: :cascade
   add_foreign_key "comments", "annotations", on_delete: :cascade
+  add_foreign_key "papers", "users", column: "submitter_id", on_delete: :cascade
+  add_foreign_key "reviews", "papers", on_delete: :cascade
+  add_foreign_key "reviews", "users", column: "reviewer_id", on_delete: :cascade
 end

@@ -14,5 +14,6 @@ private
     # Thanks to this article I just found for the tip: http://mattberther.com/2007/10/19/uploading-files-to-a-database-using-rails
     return File.basename(filename)
   end
-  has_many :annotations
+  has_many :reviews
+  belongs_to :submitter, class_name: 'User'
 end

@@ -2,9 +2,10 @@ Rails.application.routes.draw do
   devise_for :users
   resources :papers, only: [:index, :create, :show]
   namespace :api do
-    resources :papers
-    resources :annotations do
-      resources :comments
+    resources :papers do
+      resources :annotations do
+        resources :comments
+      end
     end
   end
   get '/', to: 'home#index', as: :home_index

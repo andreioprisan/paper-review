@@ -16,7 +16,11 @@ class Api::CommentsController < ApiController
     @comment = @annotation.comments.new(comment_params)
 
     if @comment.save
-      render json: @comment, status: :created, location: api_annotation_comment_url(annotation_id: @comment.annotation_id, id: @comment.id)
+      render json: @comment,
+             status: :created,
+             location: api_paper_annotation_comment_url(paper_id: @annotation.review.paper_id,
+                                                        annotation_id: @comment.annotation_id,
+                                                        id: @comment.id)
     else
       render json: @comment.errors, status: :unprocessable_entity
     end
