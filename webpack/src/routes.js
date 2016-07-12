@@ -8,6 +8,7 @@ export default () => {
   return (
     <Route path="/" component={App}>
       <IndexRoute component={Page.PapersToReview} />
+      <Route path="review/:paperId" component={Page.PaperReview} />
     </Route>
   )
 }
