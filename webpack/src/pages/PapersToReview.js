@@ -1,14 +1,19 @@
 import React, { Component } from 'react'
-import styles from './style.css'
-import Viewer from 'components/Viewer'
+import { PapersToReview as PapersToReviewContainer } from 'containers'
+import { asyncConnect } from 'redux-connect'
+import { load, isLoaded } from 'redux/modules/papers'
 
+@asyncConnect([{
+  promise: ({ store: { dispatch, getState } }) => {
+    if (!isLoaded(getState())) {
+      return dispatch(load())
+    }
+  }
+}])
 export default class PapersToReview extends Component {
   render() {
     return (
-      <div>
-        <div className={styles.wrapper}>PapersToReview</div>
-        <Viewer documentId={1} />
-      </div>
+      <PapersToReviewContainer />
     )
   }
 }
