@@ -9,7 +9,7 @@ var strip = require('strip-loader');
 var autoprefixer = require('autoprefixer');
 
 var projectRootPath = path.resolve(__dirname, '../');
-var assetsPath = path.resolve(projectRootPath, './static/dist');
+var assetsPath = path.resolve(projectRootPath, '../public/js/');
 
 module.exports = {
   devtool: 'source-map',
@@ -23,7 +23,7 @@ module.exports = {
     path: assetsPath,
     filename: '[name].js',
     chunkFilename: '[name].js',
-    publicPath: '/dist/'
+    publicPath: '/js/'
   },
   module: {
     loaders: [
@@ -67,6 +67,8 @@ module.exports = {
 
     // ignore dev config
     new webpack.IgnorePlugin(/\.\/dev/, /\/config$/),
+
+    new webpack.EnvironmentPlugin(['NODE_ENV']),
 
     // optimizations
     new webpack.optimize.DedupePlugin(),

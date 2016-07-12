@@ -1,2 +1,6 @@
 <div id="content"></div>
-<script src="//localhost:3001/dist/main.js"></script>
+<% if Rails.env.development? %>
+  <script src="//localhost:3001/dist/main.js"></script>
+<% else %>
+  <script src="/js/main.js"></script>
+<% end %>
