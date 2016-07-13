@@ -3,6 +3,9 @@
   <head>
     <title>paper-review</title>
     <link href="/styles/template.css" rel="stylesheet" />
+    <% if Rails.env.production? %>
+      <link href="/dist/styles.css" rel="stylesheet" />
+    <% end %>
     <script src="/pdfviewer/pdf.js"></script>
     <script src="/pdfviewer/pdf_viewer.js"></script>
   </head>
