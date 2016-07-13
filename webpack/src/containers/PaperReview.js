@@ -5,7 +5,8 @@ import PaperReviewComponent from 'components/PaperReview'
 
 @connect(
   state => ({
-    papers: state.papers
+    papers: state.papers,
+    questions: state.questions
   }),
   { loadDetail }
 )
@@ -13,7 +14,8 @@ export default class PaperReview extends Component {
   static propTypes = {
     loadDetail: PropTypes.func.isRequired,
     paperId: PropTypes.string.isRequired,
-    papers: PropTypes.object.isRequired
+    papers: PropTypes.object.isRequired,
+    questions: PropTypes.object.isRequired
   }
 
   render() {
@@ -25,7 +27,7 @@ export default class PaperReview extends Component {
     return (
       <div>
         {loading && <div>Loading ...</div>}
-        {!this.props.papers.error && !loading && detail && <PaperReviewComponent {...detail[this.props.paperId]} />}
+        {!this.props.papers.error && !loading && detail && <PaperReviewComponent {...detail[this.props.paperId]} questions={this.props.questions.data} />}
         {!loading && this.props.papers.error && this.props.papers.error.detail}
       </div>
     )
