@@ -3,13 +3,15 @@ require 'test_helper'
 class Api::AnnotationsControllerTest < ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers
   setup do
-    @annotation = annotations(:one)
-    @paper = papers(:one)
-    sign_in users(:one)
+    @annotation = create(:annotation)
+    @annotation2 = create(:annotation)
+    @paper = @annotation.review.paper
+    sign_in @annotation.review.reviewer
   end
 
   test "should get index" do
     get api_paper_annotations_url(paper_id: @paper.id), as: :json
+    assert_equal [@annotation].to_json, response.body
     assert_response :success
   end
 
