@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import Toolbar from './Toolbar'
 import Comments from './Comments'
 import PDFJSAnnotate from 'lib/pdf-annotate'
-import ApiStoreAdapter from './ApiStoreAdapter'
+import ApiStoreAdapter from 'helpers/ApiStoreAdapter'
 import debounce from 'helpers/debounce'
 
 const { UI } = PDFJSAnnotate
