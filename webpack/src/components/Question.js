@@ -5,13 +5,13 @@ import styles from './questions.css'
 export default class Question extends Component {
 
   render() {
-    const { text, question_type, steps } = this.props
+    const { id, text, question_type, steps, onChange, value } = this.props
 
     let input
     if(question_type === 'rating') {
-      input = <Slider min={1} max={steps} value={1} onChange={() => true} />
+      input = <Slider min={1} max={steps} value={value} onChange={(value) => onChange(id, value)} />
     } else {
-      input = <textarea required></textarea>
+      input = <textarea required value={value} onChange={(e) => onChange(id, e.target.value)}></textarea>
     }
 
     return (
@@ -24,7 +24,10 @@ export default class Question extends Component {
 }
 
 Question.propTypes = {
+  id: PropTypes.number.isRequired,
   text: PropTypes.string.isRequired,
   question_type: PropTypes.string.isRequired,
-  steps: PropTypes.number
+  steps: PropTypes.number,
+  onChange: PropTypes.func.isRequired,
+  value: PropTypes.any
 }

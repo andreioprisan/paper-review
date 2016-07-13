@@ -11,7 +11,7 @@ const PaperReview = ({ id, name, questions }) => (
       <h2>{name} <Toolbar /></h2>
       <Viewer documentId={id} />
       <Comments />
-      <Questions questions={questions} />
+      <Questions paperId={id} questions={questions} />
     </div>
   </div>
 )
