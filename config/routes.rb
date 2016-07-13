@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   devise_for :users
   resources :papers, only: [:index, :create, :show]
   namespace :api do
+    resources :questions, only: [:index]
     resources :papers do
       resources :annotations do
         resources :comments
