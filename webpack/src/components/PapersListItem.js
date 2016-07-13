@@ -3,9 +3,11 @@ import { Link } from 'react-router'
 
 export default function PapersListItem({ name, id }) {
   return (
-    <li>
-      <Link to={{ pathname: `/review/${id}` }}>{name}</Link>
-    </li>
+    <ul className="lister">
+      <li>
+        <Link to={{ pathname: `/review/${id}` }}>{name}</Link>
+      </li>
+    </ul>
   )
 }
 

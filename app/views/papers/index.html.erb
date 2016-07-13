@@ -1,8 +1,14 @@
-<%= form_for(@paper) do |f| %>
-  <div class="field">
-    <%= f.file_field :data %>
+
+<div class="cwrapper">
+  <div class="content">
+    <h1>Submit paper</h1>
+    <%= form_for(@paper) do |f| %>
+      <p>
+        <%= f.file_field :data, accept: 'application/pdf' %>
+      </p>
+      <p>
+        <%= f.submit "Submit for review" %>
+      </p>
+    <% end %>
   </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+</div>

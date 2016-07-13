@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import styles from './comments.css'
 
 import PDFJSAnnotate from 'lib/pdf-annotate'
 const { UI } = PDFJSAnnotate
@@ -69,27 +70,20 @@ export default class Comments extends Component {
 
     let commentList
     if(comments.length) {
-      commentList = this.state.comments.map((c, i) => <div key={i} className="comment-list-item">{c.content}</div>)
+      commentList = this.state.comments.map((c, i) => <div key={i} className={styles.item}>{c.content}</div>)
     } else {
-      commentList = <div className="comment-list-item">No comments</div>
+      commentList = <div className={styles.item}>No comments</div>
     }
 
-    let form
-    if(annotationId) {
-      form = <form className="comment-list-form" onSubmit={this.onSubmit.bind(this)}>
-              <input type="text" ref="content" placeholder="Add a Comment" />
-            </form>
-    }
+    if(!annotationId) return <div />
 
     return (
-      <div id="comment-wrapper">
+      <div className={styles.wrapper}>
         <h4>Comments</h4>
-        <div className="comment-list">
-          <div className="comment-list-container">
-            {commentList}
-          </div>
-          {form}
-        </div>
+        {commentList}
+        <form onSubmit={this.onSubmit.bind(this)}>
+          <input type="text" ref="content" placeholder="Add a Comment" />
+        </form>
       </div>
     )
   }

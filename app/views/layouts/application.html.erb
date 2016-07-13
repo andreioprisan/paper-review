@@ -2,10 +2,22 @@
 <html>
   <head>
     <title>paper-review</title>
+    <link href="/styles/template.css" rel="stylesheet" />
     <script src="/pdfviewer/pdf.js"></script>
     <script src="/pdfviewer/pdf_viewer.js"></script>
   </head>
   <body>
+    <div class="hwrapper">
+      <div class="header">
+        <div class="logo"><a href="/">paper-review</a></div>
+        <ul class="hnav">
+          <li><a href="/papers/">Submit paper</a></li>
+          <li class="right last"><%= link_to "Login", new_user_session_path %></li>
+          <li class="right"><%= link_to "Signup", new_user_registration_path %></li>
+          <div class="clear" />
+        </ul>
+      </div>
+    </div>
     <%= yield %>
   </body>
 </html>

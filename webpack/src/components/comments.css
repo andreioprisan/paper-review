@@ -1,0 +1,16 @@
+
+.wrapper {
+  position: absolute;
+  top: 30%;
+  right: 0;
+  bottom: 30%;
+  overflow: auto;
+  width: 250px;
+  background: #eaeaea;
+  border: 1px solid #d0d0d0;
+  padding-left: 1rem;
+}
+
+.item {
+  margin: 0.5rem 0;
+}

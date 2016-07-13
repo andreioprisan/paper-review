@@ -1,9 +1,8 @@
 import React, { Component, PropTypes } from 'react'
-import Toolbar from './Toolbar'
-import Comments from './Comments'
 import PDFJSAnnotate from 'lib/pdf-annotate'
 import ApiStoreAdapter from 'helpers/ApiStoreAdapter'
 import debounce from 'helpers/debounce'
+import styles from './viewer.css'
 
 const { UI } = PDFJSAnnotate
 let PAGE_HEIGHT
@@ -49,12 +48,9 @@ export default class Viewer extends Component {
   render() {
     return (
       <div>
-        <Toolbar />
-        <div id="content-wrapper" onScroll={this.onScroll}>
+        <div className={styles.wrapper} onScroll={this.onScroll}>
           <div ref="viewer" className="pdfViewer"></div>
         </div>
-        <Comments />
-        <link rel="stylesheet" type="text/css" href="/pdfviewer/toolbar.css"/>
         <link rel="stylesheet" type="text/css" href="/pdfviewer/pdf_viewer.css"/>
       </div>
     )

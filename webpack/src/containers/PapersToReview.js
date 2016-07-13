@@ -24,9 +24,16 @@ export default class PapersToReview extends Component {
 
     if (data && !data.error && !loading) {
       return (
-        <ul>
-          {data.map((item, key) => <PapersListItem key={key} {...item} />)}
-        </ul>
+        <div className="cwrapper">
+          <div className="content">
+            <div className="cbox">
+              <h3>Papers to review</h3>
+              <div className="ultable">
+                {data.map((item, key) => <PapersListItem key={key} {...item} />)}
+              </div>
+            </div>
+          </div>
+        </div>
       )
     }
 
