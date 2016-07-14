@@ -11,6 +11,7 @@ FactoryGirl.define do
   factory :paper do
     name 'paper'
     data []
+    requested_reviews 2
     association :submitter, factory: :user
   end
 

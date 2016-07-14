@@ -7,6 +7,10 @@
         <%= f.file_field :data, accept: 'application/pdf' %>
       </p>
       <p>
+        <%= f.label :requested_reviews %><br />
+        <%= f.number_field :requested_reviews, value: 5 %>
+      </p>
+      <p>
         <%= f.submit "Submit for review" %>
       </p>
     <% end %>
