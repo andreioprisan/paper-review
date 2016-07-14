@@ -14,11 +14,13 @@ export default function reducer(state = initialState, action = {}) {
     case SUBMIT:
       return {
         ...state,
-        submitting: true
+        submitting: true,
+        submitted: false
       }
     case SUBMIT_SUCCESS:
       return Object.assign({}, state, {
         submitting: false,
+        submitted: true,
         error: null,
         result: action.result
       })
@@ -38,6 +40,13 @@ export default function reducer(state = initialState, action = {}) {
       }
     default:
       return state
+  }
+}
+
+export function submit(paperId, answers) {
+  return {
+    types: [SUBMIT, SUBMIT_SUCCESS, SUBMIT_FAIL],
+    promise: client => client.post(`papers/${paperId}/reviews`, { data: { answers } })
   }
 }
 

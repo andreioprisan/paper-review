@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   namespace :api do
     resources :questions, only: [:index]
     resources :papers do
+      resources :reviews, only: [:create]
       resources :annotations do
         resources :comments
       end

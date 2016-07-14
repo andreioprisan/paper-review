@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160713120913) do
+ActiveRecord::Schema.define(version: 20160713204341) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,6 +21,16 @@ ActiveRecord::Schema.define(version: 20160713120913) do
     t.datetime "updated_at", null: false
     t.integer  "review_id",  null: false
     t.index ["review_id"], name: "index_annotations_on_review_id", using: :btree
+  end
+
+  create_table "answers", force: :cascade do |t|
+    t.text     "question",      null: false
+    t.text     "answer"
+    t.string   "question_type", null: false
+    t.integer  "review_id",     null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.index ["review_id"], name: "index_answers_on_review_id", using: :btree
   end
 
   create_table "comments", force: :cascade do |t|
@@ -68,6 +78,7 @@ ActiveRecord::Schema.define(version: 20160713120913) do
   end
 
   add_foreign_key "annotations", "reviews", on_delete: :cascade
+  add_foreign_key "answers", "reviews", on_delete: :cascade
   add_foreign_key "comments", "annotations", on_delete: :cascade
   add_foreign_key "papers", "users", column: "submitter_id", on_delete: :cascade
   add_foreign_key "reviews", "papers", on_delete: :cascade
