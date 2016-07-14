@@ -25,6 +25,6 @@
         </ul>
       </div>
     </div>
-    <%= yield %>
+    <%= content_for?(:content) ? yield(:content) : yield %>
   </body>
 </html>
