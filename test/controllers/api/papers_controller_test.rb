@@ -10,14 +10,18 @@ class Api::PapersControllerTest < ActionDispatch::IntegrationTest
 
   test "should get only papers for review" do
     unfinished_review = create(:review, reviewer: @user)
-    finished_review = create(:finished_review)
+    finished_review = create(:finished_review, reviewer: @user)
+
+    another_paper = create(:paper)
+    create_pair(:finished_review, paper: another_paper)
 
     get api_papers_url, as: :json
-    returned_ids = response.parsed_body.map { |i| i['id'] }
+    returned_ids = response.parsed_body.map { |i| [i['id'], i['finished'], i['user_reviewed']] }
 
-    assert_includes returned_ids, @paper.id, 'Paper with no review'
-    assert_includes returned_ids, unfinished_review.paper.id, 'Paper with unfinished review we should find'
-    refute_includes returned_ids, finished_review.paper.id, 'Paper with finished review we should not find'
+    assert_includes returned_ids, [@paper.id, false, false], 'Paper with no review'
+    assert_includes returned_ids, [unfinished_review.paper.id, false, false], 'Paper with unfinished review'
+    assert_includes returned_ids, [finished_review.paper.id, false, true], 'Paper with finished review'
+    assert_includes returned_ids, [another_paper.id, true, false], 'Paper with two finished reviews'
     assert_response :success
   end
 

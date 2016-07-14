@@ -48,7 +48,7 @@ ul.hnav {list-style:none; margin:0; padding:10px 0; text-transform:uppercase; fo
 div.ultable {margin-top:10px;}
 ul.lister {list-style:none; text-align:left; border-bottom:1px solid #CCC; padding:5px 15px; font-size:14px; background:#E1E1E1; margin:0 -15px;}
 ul.lheader {background:none;}
-ul.lister li {display:inline-block; width:13%;}
+ul.lister li {display:inline-block; width:40%;}
 ul.lister a {text-decoration:none;}
 ul.lister a:hover {text-decoration:underline;}
 

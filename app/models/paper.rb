@@ -8,6 +8,15 @@ class Paper < ApplicationRecord
     end
   end
 
+  def finished
+    # TODO: terribly inefficient, use database for this
+    reviews.where(finished: true).count >= requested_reviews
+  end
+
+  def user_reviewed(user)
+    reviews.where(finished: true, reviewer: user).exists?
+  end
+
 private
   def sanitize_filename(filename)
     # Get only the filename, not the whole path (for IE)

@@ -28,6 +28,6 @@ class PapersController < ApplicationController
   end
 
   def paper_params
-    params.require(:paper).permit(:data)
+    params.require(:paper).permit(:data, :requested_reviews)
   end
 end

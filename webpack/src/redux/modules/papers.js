@@ -2,6 +2,7 @@ const LOAD = 'papers/LOAD'
 const LOAD_SUCCESS = 'papers/LOAD_SUCCESS'
 const LOAD_DETAIL_SUCCESS = 'papers/LOAD_DETAIL_SUCCESS'
 const LOAD_FAIL = 'papers/LOAD_FAIL'
+import { SUBMIT_SUCCESS } from './reviews'
 
 const initialState = {
   loaded: false,
@@ -39,6 +40,11 @@ export default function reducer(state = initialState, action = {}) {
         loading: false,
         loaded: false,
         error: action.error
+      }
+    case SUBMIT_SUCCESS:
+      return {
+        ...state,
+        loaded: false
       }
     default:
       return state

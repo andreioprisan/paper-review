@@ -29,6 +29,10 @@ export default class PapersToReview extends Component {
             <div className="cbox">
               <h3>Papers to review</h3>
               <div className="ultable">
+                <ul className="lister lheader">
+                  <li>Name</li>
+                  <li>State</li>
+                </ul>
                 {data.map((item, key) => <PapersListItem key={key} {...item} />)}
               </div>
             </div>

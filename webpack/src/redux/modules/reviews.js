@@ -1,6 +1,6 @@
 const CHANGE = 'reviews/CHANGE'
 const SUBMIT = 'reviews/SUBMIT'
-const SUBMIT_SUCCESS = 'reviews/SUBMIT_SUCCESS'
+export const SUBMIT_SUCCESS = 'reviews/SUBMIT_SUCCESS'
 const SUBMIT_FAIL = 'reviews/SUBMIT_FAIL'
 
 const initialState = {
