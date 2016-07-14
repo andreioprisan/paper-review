@@ -15,8 +15,12 @@
         <div class="logo"><a href="/">paper-review</a></div>
         <ul class="hnav">
           <li><a href="/papers/">Submit paper</a></li>
-          <li class="right last"><%= link_to "Login", new_user_session_path %></li>
-          <li class="right"><%= link_to "Signup", new_user_registration_path %></li>
+          <% if current_user %>
+            <li class="right last"><%= link_to "Sign out", destroy_user_session_path %></li>
+          <% else %>
+            <li class="right last"><%= link_to "Login", new_user_session_path %></li>
+            <li class="right"><%= link_to "Signup", new_user_registration_path %></li>
+          <% end %>
           <div class="clear" />
         </ul>
       </div>
