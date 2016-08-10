@@ -19,20 +19,23 @@ export default function reducer(state = initialState, action = {}) {
         loading: true
       }
     case LOAD_SUCCESS:
-      return Object.assign({}, state, {
+      return {
+        ...state,
         loading: false,
         loaded: true,
         error: null,
         data: action.result
-      })
+      }
     case LOAD_DETAIL_SUCCESS: {
       const newState = { ...state }
 
       newState.detail[action.id] = action.result
-      return Object.assign({}, newState, {
+
+      return {
+        ...newState,
         loading: false,
         error: null
-      })
+      }
     }
     case LOAD_FAIL:
       return {

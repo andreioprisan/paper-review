@@ -18,12 +18,12 @@ export default function reducer(state = initialState, action = {}) {
         submitted: false
       }
     case SUBMIT_SUCCESS:
-      return Object.assign({}, state, {
+      return {
         submitting: false,
         submitted: true,
         error: null,
         result: action.result
-      })
+      }
     case SUBMIT_FAIL:
       return {
         ...state,

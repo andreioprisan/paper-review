@@ -16,12 +16,13 @@ export default function reducer(state = initialState, action = {}) {
         loading: true
       }
     case LOAD_SUCCESS:
-      return Object.assign({}, state, {
+      return {
+        ...state,
         loading: false,
         loaded: true,
         error: null,
         data: action.result
-      })
+      }
     case LOAD_FAIL:
       return {
         ...state,

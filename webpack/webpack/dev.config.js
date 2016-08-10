@@ -1,6 +1,5 @@
 require('babel-polyfill');
 
-var fs = require('fs');
 var path = require('path');
 var webpack = require('webpack');
 var assetsPath = path.resolve(__dirname, '../static/dist');
@@ -8,48 +7,6 @@ var config = require('../src/config');
 var host = config.host;
 var port = (+process.env.PORT + 1) || 3001;
 var HappyPack = require('happypack');
-
-var babelrc = fs.readFileSync('./.babelrc');
-var babelrcObject = {};
-
-try {
-  babelrcObject = JSON.parse(babelrc);
-} catch (err) {
-  console.error('==>     ERROR: Error parsing your .babelrc.');
-  console.error(err);
-}
-
-var babelrcObjectDevelopment = babelrcObject.env && babelrcObject.env.development || {};
-
-var combinedPlugins = babelrcObject.plugins || [];
-combinedPlugins = combinedPlugins.concat(babelrcObjectDevelopment.plugins);
-
-var babelLoaderQuery = Object.assign({}, babelrcObjectDevelopment, babelrcObject, {plugins: combinedPlugins});
-delete babelLoaderQuery.env;
-
-babelLoaderQuery.plugins = babelLoaderQuery.plugins || [];
-var reactTransform = null;
-for (var i = 0; i < babelLoaderQuery.plugins.length; ++i) {
-  var plugin = babelLoaderQuery.plugins[i];
-  if (Array.isArray(plugin) && plugin[0] === 'react-transform') {
-    reactTransform = plugin;
-  }
-}
-
-if (!reactTransform) {
-  reactTransform = ['react-transform', {transforms: []}];
-  babelLoaderQuery.plugins.push(reactTransform);
-}
-
-if (!reactTransform[1] || !reactTransform[1].transforms) {
-  reactTransform[1] = Object.assign({}, reactTransform[1], {transforms: []});
-}
-
-reactTransform[1].transforms.push({
-  transform: 'react-transform-hmr',
-  imports: ['react'],
-  locals: ['module']
-});
 
 module.exports = {
   devtool: 'inline-eval-cheap-source-map',
@@ -71,7 +28,7 @@ module.exports = {
       {
         test: /\.js?$/,
         exclude: /node_modules/,
-        loaders: ['babel?' + JSON.stringify(babelLoaderQuery), 'eslint-loader'],
+        loaders: ['babel', 'eslint-loader'],
         happy: { id: 'js' }
       },
       { test: /\.json$/, include: path.resolve(__dirname, "../src/"), loader: 'json-loader' },
@@ -101,7 +58,6 @@ module.exports = {
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.IgnorePlugin(/webpack-stats\.json$/),
     new webpack.DefinePlugin({
       __DEVELOPMENT__: true,
       __DEVTOOLS__: true
