@@ -42,14 +42,14 @@ export default class Questions extends Component {
   }
 
   render() {
-    const { reviews, paperId } = this.props
+    const { questions, reviews, paperId } = this.props
     const paperData = this.paperData(reviews, paperId)
 
     return (
       <div>
         <h3>Questions</h3>
         <form onSubmit={this.onSubmit.bind(this)}>
-          {this.props.questions.map((q, key) => <Question key={key} value={paperData[q.id]} onChange={this.onChange.bind(this)} {...q} />)}
+          {questions.map((q, key) => <Question key={key} value={paperData[q.id]} onChange={this.onChange.bind(this)} {...q} />)}
           <button className="button blue" type="submit">Submit review</button>
           <h3>{!reviews.submitting && this.props.reviews.error && this.props.reviews.error.message}</h3>
         </form>

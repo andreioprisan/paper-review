@@ -15,7 +15,7 @@ export default function PapersListItem({ id, name, finished, user_reviewed }) {
   return (
     <ul className="lister finished">
       <li>
-        {link ? <Link to={{ pathname: `/review/${id}` }}>{name}</Link> : name}
+        {link ? <Link to={`/review/${id}`}>{name}</Link> : name}
       </li>
       <li>
         {message}
